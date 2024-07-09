@@ -126,7 +126,7 @@ function updateChart() {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Cost of Waste ($)',
+                label: 'Cost of Waste (kr.)',
                 data: data,
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',
