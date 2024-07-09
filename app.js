@@ -1,10 +1,10 @@
 document.getElementById('wasteForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const wasteType = document.getElementById('wasteType').value = '';
-    const quantity = document.getElementById('quantity').value = '';
-    const pricePerKg = document.getElementById('pricePerKg').value = '';
-    const date = document.getElementById('date').value = '';
+    const wasteType = document.getElementById('wasteType').value;
+    const quantity = document.getElementById('quantity').value;
+    const pricePerKg = document.getElementById('pricePerKg').value;
+    const date = document.getElementById('date').value;
     const cost = parseFloat(quantity) * parseFloat(pricePerKg);
 
     const wasteData = {
@@ -17,7 +17,13 @@ document.getElementById('wasteForm').addEventListener('submit', function(e) {
     saveWasteData(wasteData);
     displayWasteData();
     updateChart();
+
+    document.getElementById('wasteType').value = '';
+    document.getElementById('quantity').value = '';
+    document.getElementById('pricePerKg').value = '';
+    document.getElementById('date').value = '';
 });
+
 
 function saveWasteData(data) {
     let wasteArray = JSON.parse(localStorage.getItem('wasteData')) || [];
