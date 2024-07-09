@@ -5,13 +5,16 @@ document.getElementById('wasteForm').addEventListener('submit', function(e) {
     const quantity = document.getElementById('quantity').value;
     const pricePerKg = document.getElementById('pricePerKg').value;
     const date = document.getElementById('date').value;
-    const cost = parseFloat(quantity) * parseFloat(pricePerKg);
+    const department = document.getElementById('department').value;     const cost = parseFloat(quantity) * parseFloat(pricePerKg);
 
     const wasteData = {
         type: wasteType,
         quantity: parseFloat(quantity),
         cost: cost,
-        date: date
+        date: date,
+        department: department  
+
+
     };
 
     saveWasteData(wasteData);
@@ -22,6 +25,7 @@ document.getElementById('wasteForm').addEventListener('submit', function(e) {
     document.getElementById('quantity').value = '';
     document.getElementById('pricePerKg').value = '';
     document.getElementById('date').value = '';
+    document.getElementById('department').value = ''; 
 });
 
 
@@ -42,10 +46,14 @@ function displayWasteData() {
         let cell2 = row.insertCell(1);
         let cell3 = row.insertCell(2);
         let cell4 = row.insertCell(3);
+        let cell5 = row.insertCell(4);
         cell1.innerHTML = item.type;
         cell2.innerHTML = item.quantity;
         cell3.innerHTML = item.cost.toFixed(2);
         cell4.innerHTML = item.date;
+        cell5.innerHTML = item.department; 
+
+
     });
 }
 
@@ -71,6 +79,8 @@ function saveDataAsPDF() {
         doc.text("Quantity (kg)", 60, y);
         doc.text("Cost (kr)", 110, y);
         doc.text("Date", 160, y);
+        doc.text("Department", 190, y);
+        
 
         // Add data below the chart
         const wasteArray = JSON.parse(localStorage.getItem('wasteData')) || [];
@@ -80,6 +90,7 @@ function saveDataAsPDF() {
             doc.text(item.quantity.toString(), 60, y);
             doc.text(item.cost.toFixed(2).toString() + ' kr', 110, y);
             doc.text(item.date, 160, y);
+            doc.text(item.department, 190, y);
             y += 6;
             if (y > 280) {
                 doc.addPage();
